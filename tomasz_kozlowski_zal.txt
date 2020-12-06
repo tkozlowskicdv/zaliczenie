@@ -1,0 +1,41 @@
+Zad 2
+
+SELECT 
+e.firstName,
+e.lastName, 
+o.country,
+COUNT(*) liczba_klient
+FROM employees e JOIN offices o on e.officeCode = o.officeCode
+				 JOIN customers c on c.salesRepEmployeeNumber = e.employeeNumber
+GROUP BY c.salesRepEmployeeNumber
+
+
+Zad 3 - done
+Zad 4
+a
+SELECT 
+year(orderDate) rok,
+COUNT(*)
+FROM products p JOIN orderdetails od on p.productCode=od.productCode
+				JOIN orders o on od.orderNumber=o.orderNumber
+WHERE p.productName like '%Harley Davidson%'
+GROUP BY rok
+
+
+
+b
+SELECT 
+year(orderDate) rok,
+SUM(od.priceEach*od.quantityOrdered) suma
+FROM products p JOIN orderdetails od on p.productCode=od.productCode
+				JOIN orders o on od.orderNumber=o.orderNumber
+WHERE p.productName like '%Harley Davidson%'
+GROUP BY rok
+
+c
+SELECT
+pl.productLine,
+COUNT(*)
+FROM productlines pl JOIN products p on pl.productLine=p.productLine
+GROUP BY pl.productLine
+HAVING COUNT(*)>10
